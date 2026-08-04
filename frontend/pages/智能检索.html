@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能检索</title>
+    <style id="theme-vars">
+/* ===== RAG Document System - Brand Design Tokens ===== */
+:root {
+  /* ── Color System ── */
+  --color-primary: #2B5EA7;
+  --color-primary-hover: #1E4A8A;
+  --color-primary-light: #E8F0FA;
+  --color-primary-subtle: #F0F5FC;
+
+  --color-bg: #F5F7FA;
+  --color-bg-secondary: #FFFFFF;
+  --color-bg-tertiary: #EEF1F6;
+  --color-bg-hover: #F0F2F7;
+
+  --color-text-primary: #1A2332;
+  --color-text-secondary: #5A6B7F;
+  --color-text-tertiary: #8C96A3;
+  --color-text-inverse: #FFFFFF;
+
+  --color-border: #DDE3EB;
+  --color-border-light: #E8ECF1;
+  --color-divider: #F0F2F5;
+
+  /* State colors */
+  --state-success: #2D9B6E;
+  --state-warning: #D4930D;
+  --state-error: #D04848;
+  --state-info: #2B5EA7;
+
+  /* Tag/category colors */
+  --tag-tech: #E8F0FA;
+  --tag-tech-text: #2B5EA7;
+  --tag-hr: #FEF3E2;
+  --tag-hr-text: #B8860B;
+  --tag-finance: #E8F8F0;
+  --tag-finance-text: #2D9B6E;
+  --tag-legal: #F0ECF8;
+  --tag-legal-text: #6B4FA2;
+  --tag-general: #F0F2F5;
+  --tag-general-text: #5A6B7F;
+
+  /* ── Typography ── */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 30px;
+  --font-size-3xl: 36px;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.02em;
+
+  /* ── Spacing ── */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+  --space-4xl: 64px;
+
+  /* ── Radius ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* ── Shadows (static surfaces use border-first; floating layers only) ── */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-float: 0 8px 32px rgba(0, 0, 0, 0.10);
+
+  /* ── Transitions ── */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+
+  /* ── Z-index ── */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal-backdrop: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+}
+
+/* ── Dark Mode ── */
+html.dark {
+  --color-primary: #5B8FD4;
+  --color-primary-hover: #7AA8E5;
+  --color-primary-light: #1A2F4A;
+  --color-primary-subtle: #15263E;
+
+  --color-bg: #0F1419;
+  --color-bg-secondary: #1A2332;
+  --color-bg-tertiary: #243042;
+  --color-bg-hover: #1E2B3D;
+
+  --color-text-primary: #E8ECF1;
+  --color-text-secondary: #A0AEBE;
+  --color-text-tertiary: #6B7B8D;
+  --color-text-inverse: #1A2332;
+
+  --color-border: #2D3B4E;
+  --color-border-light: #243042;
+  --color-divider: #1E2B3D;
+
+  --state-success: #3CB371;
+  --state-warning: #E6A817;
+  --state-error: #E05555;
+  --state-info: #5B8FD4;
+
+  --tag-tech: #1A2F4A;
+  --tag-tech-text: #5B8FD4;
+  --tag-hr: #2E2410;
+  --tag-hr-text: #E6A817;
+  --tag-finance: #152E22;
+  --tag-finance-text: #3CB371;
+  --tag-legal: #1E1A2E;
+  --tag-legal-text: #9B7FD4;
+  --tag-general: #1E2B3D;
+  --tag-general-text: #A0AEBE;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-float: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-primary: var(--color-primary);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased" style="font-family: var(--font-family);">
+    <main class="flex min-h-screen">
+        <!-- Left Sidebar -->
+        <aside class="w-[240px] min-w-[240px] h-screen sticky top-0 flex flex-col" style="background-color: var(--color-primary);">
+            <!-- Logo Area -->
+            <div class="flex items-center gap-3 px-6 h-[56px] shrink-0">
+                <svg class="w-7 h-7 shrink-0" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-inverse)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+                </svg>
+                <span class="text-[var(--color-text-inverse)] font-semibold text-[15px] tracking-tight whitespace-nowrap truncate">RAG 知识库</span>
+            </div>
+
+            <!-- Navigation Section -->
+            <nav class="flex flex-col gap-1 px-3 mt-2">
+                <a href="#" class="nav-sidebar-item flex items-center gap-3 px-3 py-2.5 text-[13px] whitespace-nowrap transition-colors duration-150" style="color: var(--color-text-inverse); border-left: 3px solid transparent;" data-nav="document-library" data-active="false" data-dom-id="back-to-library">
+                    <i data-lucide="folder-open" class="w-[18px] h-[18px] shrink-0" style="color: var(--color-text-inverse);"></i>
+                    <span class="truncate">文档库</span>
+                </a>
+                <a href="#" class="nav-sidebar-item flex items-center gap-3 px-3 py-2.5 text-[13px] whitespace-nowrap transition-colors duration-150" style="color: var(--color-text-inverse); border-left: 3px solid transparent;" data-nav="search-result" data-active="true">
+                    <i data-lucide="search" class="w-[18px] h-[18px] shrink-0" style="color: var(--color-text-inverse);"></i>
+                    <span class="truncate">智能检索</span>
+                </a>
+                <a href="#" class="nav-sidebar-item flex items-center gap-3 px-3 py-2.5 text-[13px] whitespace-nowrap transition-colors duration-150" style="color: var(--color-text-inverse); border-left: 3px solid transparent;" data-nav="ai-chat" data-active="false" data-dom-id="nav-ai-chat">
+                    <i data-lucide="message-square" class="w-[18px] h-[18px] shrink-0" style="color: var(--color-text-inverse);"></i>
+                    <span class="truncate">AI 对话</span>
+                </a>
+            </nav>
+
+            <!-- Spacer -->
+            <div class="flex-1"></div>
+
+            <!-- Bottom User Section -->
+            <div class="flex items-center gap-3 px-5 py-4 shrink-0" style="border-top: 1px solid rgba(255,255,255,0.12);">
+                <div class="w-8 h-8 shrink-0 flex items-center justify-center text-xs font-medium" style="background-color: rgba(255,255,255,0.18); color: var(--color-text-inverse);">
+                    <span>张</span>
+                </div>
+                <div class="min-w-0">
+                    <p class="text-[13px] font-medium whitespace-nowrap truncate" style="color: var(--color-text-inverse);">张明</p>
+                    <p class="text-[11px] whitespace-nowrap truncate" style="color: rgba(255,255,255,0.6);">系统管理员</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right: Top Bar + Main Content Area -->
+        <div class="flex-1 flex flex-col min-h-screen min-w-0 overflow-hidden">
+            <!-- Top Bar -->
+            <header class="h-[56px] shrink-0 flex items-center justify-between px-6" style="background-color: var(--color-bg-secondary); border-bottom: 1px solid var(--color-border);">
+                <!-- Breadcrumb Area -->
+                <div class="flex items-center gap-2 min-w-0">
+                    <a href="#" class="flex items-center gap-1 text-[13px] whitespace-nowrap transition-colors duration-150 hover:underline" style="color: var(--color-text-tertiary);" data-dom-id="back-to-library">
+                        <i data-lucide="chevron-left" class="w-[14px] h-[14px] shrink-0"></i>
+                        <span>文档库</span>
+                    </a>
+                    <i data-lucide="chevron-right" class="w-[14px] h-[14px] shrink-0" style="color: var(--color-text-tertiary);"></i>
+                    <span class="text-[13px] font-medium truncate" style="color: var(--color-text-primary);">智能检索</span>
+                </div>
+
+                <!-- Right Actions -->
+                <div class="flex items-center gap-4 shrink-0">
+                    <button class="flex items-center justify-center w-9 h-9 transition-colors duration-150" style="color: var(--color-text-secondary);">
+                        <i data-lucide="bell" class="w-[18px] h-[18px]"></i>
+                    </button>
+                    <button class="flex items-center justify-center w-9 h-9 transition-colors duration-150" style="color: var(--color-text-secondary);">
+                        <i data-lucide="settings" class="w-[18px] h-[18px]"></i>
+                    </button>
+                    <button class="flex items-center gap-2 pl-3 transition-colors duration-150" style="border-left: 1px solid var(--color-border);">
+                        <div class="w-7 h-7 shrink-0 flex items-center justify-center text-xs font-medium" style="background-color: var(--color-primary-light); color: var(--color-primary);">
+                            <span>张</span>
+                        </div>
+                        <i data-lucide="chevron-down" class="w-[14px] h-[14px]" style="color: var(--color-text-tertiary);"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Content Slot -->
+            <div class="flex-1 overflow-y-auto p-6" style="background-color: var(--color-bg);">
+                <div class="max-w-[1200px] mx-auto">
+
+                    <!-- AI Summary Panel -->
+                    <div class="flex items-stretch" style="background-color: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden;">
+                        <div class="w-[4px] shrink-0" style="background: linear-gradient(to bottom, var(--color-primary), var(--color-primary-hover));"></div>
+                        <div class="flex-1 p-5">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div class="w-6 h-6 shrink-0 flex items-center justify-center" style="background-color: var(--color-primary-light); border-radius: var(--radius-sm);">
+                                    <i data-lucide="sparkles" class="w-[14px] h-[14px]" style="color: var(--color-primary);"></i>
+                                </div>
+                                <span class="text-[13px] font-semibold whitespace-nowrap" style="color: var(--color-primary);">AI 摘要</span>
+                            </div>
+                            <p class="text-[13px] leading-relaxed mb-4" style="color: var(--color-text-secondary);">
+                                根据检索结果，找到了 5 篇与「年度绩效考核方案」高度相关的文档。主要涉及考核指标体系、评分标准、申诉流程等核心内容。最新版本为 2024 年 Q4 更新的方案。
+                            </p>
+                            <div class="flex items-center gap-3">
+                                <button class="inline-flex items-center gap-2 px-4 py-2 text-[13px] font-medium whitespace-nowrap transition-colors duration-150" style="background-color: var(--color-primary); color: var(--color-text-inverse); border-radius: var(--radius-md);">
+                                    <i data-lucide="message-square" class="w-[14px] h-[14px]"></i>
+                                    <span>基于这些结果提问</span>
+                                </button>
+                                <button class="inline-flex items-center gap-2 px-4 py-2 text-[13px] font-medium whitespace-nowrap transition-colors duration-150" style="background-color: transparent; color: var(--color-text-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-md);">
+                                    <i data-lucide="download" class="w-[14px] h-[14px]"></i>
+                                    <span>导出摘要</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search Bar Area -->
+                    <div class="mt-5">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="flex-1 flex items-center gap-2 px-4 py-2.5" style="background-color: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-md);">
+                                <i data-lucide="search" class="w-[18px] h-[18px] shrink-0" style="color: var(--color-text-tertiary);"></i>
+                                <span class="text-[14px]" style="color: var(--color-text-primary);">年度绩效考核方案</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2 flex-nowrap overflow-x-auto">
+                                <button class="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium whitespace-nowrap shrink-0 transition-colors duration-150" style="background-color: var(--color-primary); color: var(--color-text-inverse); border-radius: var(--radius-md);">
+                                    <span>全部</span>
+                                    <span class="px-1.5 py-0.5 text-[11px]" style="background-color: rgba(255,255,255,0.2); border-radius: var(--radius-sm);">5</span>
+                                </button>
+                                <button class="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium whitespace-nowrap shrink-0 transition-colors duration-150" style="background-color: var(--color-bg-secondary); color: var(--color-text-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-md);">
+                                    <span>PDF</span>
+                                    <span class="px-1.5 py-0.5 text-[11px]" style="background-color: var(--color-bg-tertiary); border-radius: var(--radius-sm);">3</span>
+                                </button>
+                                <button class="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium whitespace-nowrap shrink-0 transition-colors duration-150" style="background-color: var(--color-bg-secondary); color: var(--color-text-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-md);">
+                                    <span>Word</span>
+                                    <span class="px-1.5 py-0.5 text-[11px]" style="background-color: var(--color-bg-tertiary); border-radius: var(--radius-sm);">1</span>
+                                </button>
+                                <div class="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium whitespace-nowrap shrink-0" style="background-color: var(--color-bg-secondary); color: var(--color-text-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-md);">
+                                    <i data-lucide="arrow-up-down" class="w-[12px] h-[12px]" style="color: var(--color-text-tertiary);"></i>
+                                    <span>相关度排序</span>
+                                    <i data-lucide="chevron-down" class="w-[12px] h-[12px]" style="color: var(--color-text-tertiary);"></i>
+                                </div>
+                            </div>
+                            <span class="text-[12px] whitespace-nowrap shrink-0 ml-3" style="color: var(--color-text-tertiary);">找到 5 条相关结果</span>
+                        </div>
+                    </div>
+
+                    <!-- Main Content: Results List + Right Sidebar -->
+                    <div class="flex gap-6 mt-5">
+
+                        <!-- Search Results List -->
+                        <div class="flex-1 min-w-0 flex flex-col gap-4">
+
+                            <!-- Result 1 -->
+                            <a href="#" class="block transition-colors duration-150" style="background-color: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 20px;" data-dom-id="result-item-click">
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-2 mb-1.5">
+                                            <span class="inline-flex items-center px-2 py-0.5 text-[11px] font-semibold whitespace-nowrap" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: var(--radius-sm);">98% 匹配</span>
+                                            <h3 class="text-[15px] font-semibold truncate" style="color: var(--color-text-primary);">2024年度<span class="px-0.5" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: 2px;">绩效考核</span>方案_v4.0.pdf</h3>
+                                        </div>
+                                        <div class="flex items-center gap-1.5 mb-2">
+                                            <span class="text-[11px]" style="color: var(--color-text-tertiary);">人力资源 > 规章制度 > 考核管理</span>
+                                        </div>
+                                        <p class="text-[13px] leading-relaxed line-clamp-2" style="color: var(--color-text-secondary);">
+                                            ...根据公司年度<span class="px-0.5" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: 2px;">绩效考核</span>方案，各部门需在 Q4 完成自评与互评环节，<span class="px-0.5" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: 2px;">考核</span>指标包括工作业绩、团队协作、创新能力三个维度...
+                                        </p>
+                                        <div class="flex items-center gap-4 mt-3">
+                                            <div class="flex items-center gap-1.5">
+                                                <i data-lucide="file-text" class="w-[14px] h-[14px]" style="color: var(--color-text-tertiary);"></i>
+                                                <span class="text-[11px]" style="color: var(--color-text-tertiary);">PDF · 2.4 MB</span>
+                                            </div>
+                                            <span class="text-[11px]" style="color: var(--color-text-tertiary);">2024-10-15 更新</span>
+                                            <div class="flex items-center gap-1">
+                                                <div class="w-4 h-4 shrink-0 flex items-center justify-center text-[9px] font-medium" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: var(--radius-sm);">李</div>
+                                                <span class="text-[11px]" style="color: var(--color-text-tertiary);">李红</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-1.5 mt-2.5 flex-nowrap overflow-x-auto">
+                                            <span class="inline-flex items-center px-2 py-0.5 text-[11px] whitespace-nowrap shrink-0" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border-radius: var(--radius-sm);">考核指标</span>
+                                            <span class="inline-flex items-center px-2 py-0.5 text-[11px] whitespace-nowrap shrink-0" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border-radius: var(--radius-sm);">评分标准</span>
+                                            <span class="inline-flex items-center px-2 py-0.5 text-[11px] whitespace-nowrap shrink-0" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border-radius: var(--radius-sm);">Q4时间节点</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- Result 2 -->
+                            <a href="#" class="block transition-colors duration-150" style="background-color: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 20px;" data-dom-id="result-item-click">
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-2 mb-1.5">
+                                            <span class="inline-flex items-center px-2 py-0.5 text-[11px] font-semibold whitespace-nowrap" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: var(--radius-sm);">92% 匹配</span>
+                                            <h3 class="text-[15px] font-semibold truncate" style="color: var(--color-text-primary);"><span class="px-0.5" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: 2px;">绩效考核</span>指标体系说明.docx</h3>
+                                        </div>
+                                        <div class="flex items-center gap-1.5 mb-2">
+                                            <span class="text-[11px]" style="color: var(--color-text-tertiary);">人力资源 > 规章制度</span>
+                                        </div>
+                                        <p class="text-[13px] leading-relaxed line-clamp-2" style="color: var(--color-text-secondary);">
+                                            ...本文件详细说明了<span class="px-0.5" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: 2px;">绩效考核</span>指标体系的构成，包括工作业绩权重 50%、团队协作权重 30%、创新能力权重 20%...
+                                        </p>
+                                        <div class="flex items-center gap-4 mt-3">
+                                            <div class="flex items-center gap-1.5">
+                                                <i data-lucide="file-text" class="w-[14px] h-[14px]" style="color: var(--color-text-tertiary);"></i>
+                                                <span class="text-[11px]" style="color: var(--color-text-tertiary);">Word · 856 KB</span>
+                                            </div>
+                                            <span class="text-[11px]" style="color: var(--color-text-tertiary);">2024-08-22 更新</span>
+                                            <div class="flex items-center gap-1">
+                                                <div class="w-4 h-4 shrink-0 flex items-center justify-center text-[9px] font-medium" style="background-color: var(--tag-hr); color: var(--tag-hr-text); border-radius: var(--radius-sm);">王</div>
+                                                <span class="text-[11px]" style="color: var(--color-text-tertiary);">王强</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-1.5 mt-2.5 flex-nowrap overflow-x-auto">
+                                            <span class="inline-flex items-center px-2 py-0.5 text-[11px] whitespace-nowrap shrink-0" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border-radius: var(--radius-sm);">指标权重</span>
+                                            <span class="inline-flex items-center px-2 py-0.5 text-[11px] whitespace-nowrap shrink-0" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border-radius: var(--radius-sm);">评分细则</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- Result 3 -->
+                            <a href="#" class="block transition-colors duration-150" style="background-color: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 20px;" data-dom-id="result-item-click">
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-2 mb-1.5">
+                                            <span class="inline-flex items-center px-2 py-0.5 text-[11px] font-semibold whitespace-nowrap" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: var(--radius-sm);">87% 匹配</span>
+                                            <h3 class="text-[15px] font-semibold truncate" style="color: var(--color-text-primary);">Q3<span class="px-0.5" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: 2px;">考核</span>结果汇总.xlsx</h3>
+                                        </div>
+                                        <div class="flex items-center gap-1.5 mb-2">
+                                            <span class="text-[11px]" style="color: var(--color-text-tertiary);">人力资源 > 数据报表</span>
+                                        </div>
+                                        <p class="text-[13px] leading-relaxed line-clamp-2" style="color: var(--color-text-secondary);">
+                                            ...Q3<span class="px-0.5" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: 2px;">考核</span>结果汇总表，包含各部门自评得分、互评得分及加权总分，<span class="px-0.5" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: 2px;">考核</span>覆盖率 98.5%...
+                                        </p>
+                                        <div class="flex items-center gap-4 mt-3">
+                                            <div class="flex items-center gap-1.5">
+                                                <i data-lucide="file-spreadsheet" class="w-[14px] h-[14px]" style="color: var(--color-text-tertiary);"></i>
+                                                <span class="text-[11px]" style="color: var(--color-text-tertiary);">Excel · 1.2 MB</span>
+                                            </div>
+                                            <span class="text-[11px]" style="color: var(--color-text-tertiary);">2024-10-08 更新</span>
+                                            <div class="flex items-center gap-1">
+                                                <div class="w-4 h-4 shrink-0 flex items-center justify-center text-[9px] font-medium" style="background-color: var(--tag-finance); color: var(--tag-finance-text); border-radius: var(--radius-sm);">陈</div>
+                                                <span class="text-[11px]" style="color: var(--color-text-tertiary);">陈敏</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-1.5 mt-2.5 flex-nowrap overflow-x-auto">
+                                            <span class="inline-flex items-center px-2 py-0.5 text-[11px] whitespace-nowrap shrink-0" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border-radius: var(--radius-sm);">得分汇总</span>
+                                            <span class="inline-flex items-center px-2 py-0.5 text-[11px] whitespace-nowrap shrink-0" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border-radius: var(--radius-sm);">部门对比</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- Result 4 -->
+                            <a href="#" class="block transition-colors duration-150" style="background-color: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 20px;" data-dom-id="result-item-click">
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-2 mb-1.5">
+                                            <span class="inline-flex items-center px-2 py-0.5 text-[11px] font-semibold whitespace-nowrap" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: var(--radius-sm);">85% 匹配</span>
+                                            <h3 class="text-[15px] font-semibold truncate" style="color: var(--color-text-primary);">员工<span class="px-0.5" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: 2px;">考核</span>申诉流程指南.pdf</h3>
+                                        </div>
+                                        <div class="flex items-center gap-1.5 mb-2">
+                                            <span class="text-[11px]" style="color: var(--color-text-tertiary);">人力资源 > 规章制度</span>
+                                        </div>
+                                        <p class="text-[13px] leading-relaxed line-clamp-2" style="color: var(--color-text-secondary);">
+                                            ...员工对<span class="px-0.5" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: 2px;">考核</span>结果有异议时，可在结果公布后 5 个工作日内提交申诉申请，申诉流程包括部门主管初审、HR 复审...
+                                        </p>
+                                        <div class="flex items-center gap-4 mt-3">
+                                            <div class="flex items-center gap-1.5">
+                                                <i data-lucide="file-text" class="w-[14px] h-[14px]" style="color: var(--color-text-tertiary);"></i>
+                                                <span class="text-[11px]" style="color: var(--color-text-tertiary);">PDF · 420 KB</span>
+                                            </div>
+                                            <span class="text-[11px]" style="color: var(--color-text-tertiary);">2024-06-10 更新</span>
+                                            <div class="flex items-center gap-1">
+                                                <div class="w-4 h-4 shrink-0 flex items-center justify-center text-[9px] font-medium" style="background-color: var(--tag-legal); color: var(--tag-legal-text); border-radius: var(--radius-sm);">刘</div>
+                                                <span class="text-[11px]" style="color: var(--color-text-tertiary);">刘芳</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-1.5 mt-2.5 flex-nowrap overflow-x-auto">
+                                            <span class="inline-flex items-center px-2 py-0.5 text-[11px] whitespace-nowrap shrink-0" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border-radius: var(--radius-sm);">申诉流程</span>
+                                            <span class="inline-flex items-center px-2 py-0.5 text-[11px] whitespace-nowrap shrink-0" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border-radius: var(--radius-sm);">审批节点</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- Result 5 -->
+                            <a href="#" class="block transition-colors duration-150" style="background-color: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 20px;" data-dom-id="result-item-click">
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-2 mb-1.5">
+                                            <span class="inline-flex items-center px-2 py-0.5 text-[11px] font-semibold whitespace-nowrap" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: var(--radius-sm);">78% 匹配</span>
+                                            <h3 class="text-[15px] font-semibold truncate" style="color: var(--color-text-primary);">年度绩效奖金分配方案.pdf</h3>
+                                        </div>
+                                        <div class="flex items-center gap-1.5 mb-2">
+                                            <span class="text-[11px]" style="color: var(--color-text-tertiary);">人力资源/财务 > 薪酬福利</span>
+                                        </div>
+                                        <p class="text-[13px] leading-relaxed line-clamp-2" style="color: var(--color-text-secondary);">
+                                            ...绩效奖金根据年度<span class="px-0.5" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: 2px;">考核</span>结果分级发放，A 级员工可获得 3 个月薪资的奖金，B 级 2 个月，C 级 1 个月...
+                                        </p>
+                                        <div class="flex items-center gap-4 mt-3">
+                                            <div class="flex items-center gap-1.5">
+                                                <i data-lucide="file-text" class="w-[14px] h-[14px]" style="color: var(--color-text-tertiary);"></i>
+                                                <span class="text-[11px]" style="color: var(--color-text-tertiary);">PDF · 680 KB</span>
+                                            </div>
+                                            <span class="text-[11px]" style="color: var(--color-text-tertiary);">2024-11-20 更新</span>
+                                            <div class="flex items-center gap-1">
+                                                <div class="w-4 h-4 shrink-0 flex items-center justify-center text-[9px] font-medium" style="background-color: var(--tag-general); color: var(--tag-general-text); border-radius: var(--radius-sm);">赵</div>
+                                                <span class="text-[11px]" style="color: var(--color-text-tertiary);">赵婷</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-1.5 mt-2.5 flex-nowrap overflow-x-auto">
+                                            <span class="inline-flex items-center px-2 py-0.5 text-[11px] whitespace-nowrap shrink-0" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border-radius: var(--radius-sm);">奖金分级</span>
+                                            <span class="inline-flex items-center px-2 py-0.5 text-[11px] whitespace-nowrap shrink-0" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border-radius: var(--radius-sm);">发放标准</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+
+                        <!-- Right Sidebar Panel -->
+                        <div class="w-[260px] min-w-[260px] shrink-0 flex flex-col gap-5">
+
+                            <!-- Related Documents -->
+                            <div style="background-color: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 16px;">
+                                <h4 class="text-[13px] font-semibold mb-3" style="color: var(--color-text-primary);">相关文档推荐</h4>
+                                <div class="flex flex-col gap-2.5">
+                                    <a href="#" class="flex items-center gap-2.5 transition-colors duration-150 group" data-dom-id="result-item-click">
+                                        <div class="w-8 h-8 shrink-0 flex items-center justify-center" style="background-color: var(--color-bg-tertiary); border-radius: var(--radius-sm);">
+                                            <i data-lucide="file-text" class="w-[14px] h-[14px]" style="color: var(--color-text-tertiary);"></i>
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <p class="text-[12px] font-medium truncate" style="color: var(--color-text-primary);">薪酬调整方案</p>
+                                            <p class="text-[11px] truncate" style="color: var(--color-text-tertiary);">人力资源 · PDF</p>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2.5 transition-colors duration-150 group" data-dom-id="result-item-click">
+                                        <div class="w-8 h-8 shrink-0 flex items-center justify-center" style="background-color: var(--color-bg-tertiary); border-radius: var(--radius-sm);">
+                                            <i data-lucide="file-text" class="w-[14px] h-[14px]" style="color: var(--color-text-tertiary);"></i>
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <p class="text-[12px] font-medium truncate" style="color: var(--color-text-primary);">员工培训计划</p>
+                                            <p class="text-[11px] truncate" style="color: var(--color-text-tertiary);">人力资源 · Word</p>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2.5 transition-colors duration-150 group" data-dom-id="result-item-click">
+                                        <div class="w-8 h-8 shrink-0 flex items-center justify-center" style="background-color: var(--color-bg-tertiary); border-radius: var(--radius-sm);">
+                                            <i data-lucide="file-text" class="w-[14px] h-[14px]" style="color: var(--color-text-tertiary);"></i>
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <p class="text-[12px] font-medium truncate" style="color: var(--color-text-primary);">岗位职级说明</p>
+                                            <p class="text-[11px] truncate" style="color: var(--color-text-tertiary);">人力资源 · PDF</p>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2.5 transition-colors duration-150 group" data-dom-id="result-item-click">
+                                        <div class="w-8 h-8 shrink-0 flex items-center justify-center" style="background-color: var(--color-bg-tertiary); border-radius: var(--radius-sm);">
+                                            <i data-lucide="file-spreadsheet" class="w-[14px] h-[14px]" style="color: var(--color-text-tertiary);"></i>
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <p class="text-[12px] font-medium truncate" style="color: var(--color-text-primary);">年度预算表</p>
+                                            <p class="text-[11px] truncate" style="color: var(--color-text-tertiary);">财务 · Excel</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Search History -->
+                            <div style="background-color: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 16px;">
+                                <h4 class="text-[13px] font-semibold mb-3" style="color: var(--color-text-primary);">搜索历史</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="inline-flex items-center px-2.5 py-1 text-[11px] whitespace-nowrap cursor-pointer transition-colors duration-150" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border-radius: var(--radius-sm);">报销流程</span>
+                                    <span class="inline-flex items-center px-2.5 py-1 text-[11px] whitespace-nowrap cursor-pointer transition-colors duration-150" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border-radius: var(--radius-sm);">年假政策</span>
+                                    <span class="inline-flex items-center px-2.5 py-1 text-[11px] whitespace-nowrap cursor-pointer transition-colors duration-150" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border-radius: var(--radius-sm);">项目立项</span>
+                                    <span class="inline-flex items-center px-2.5 py-1 text-[11px] whitespace-nowrap cursor-pointer transition-colors duration-150" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border-radius: var(--radius-sm);">合同模板</span>
+                                    <span class="inline-flex items-center px-2.5 py-1 text-[11px] whitespace-nowrap cursor-pointer transition-colors duration-150" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border-radius: var(--radius-sm);">加班规定</span>
+                                </div>
+                            </div>
+
+                            <!-- Trending Searches -->
+                            <div style="background-color: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 16px;">
+                                <div class="flex items-center gap-1.5 mb-3">
+                                    <i data-lucide="trending-up" class="w-[14px] h-[14px]" style="color: var(--color-text-tertiary);"></i>
+                                    <h4 class="text-[13px] font-semibold" style="color: var(--color-text-primary);">热门搜索</h4>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-5 h-5 shrink-0 flex items-center justify-center text-[10px] font-semibold" style="background-color: var(--color-primary-light); color: var(--color-primary); border-radius: var(--radius-sm);">1</span>
+                                        <span class="text-[12px] truncate" style="color: var(--color-text-secondary);">绩效考核方案</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-5 h-5 shrink-0 flex items-center justify-center text-[10px] font-semibold" style="background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary); border-radius: var(--radius-sm);">2</span>
+                                        <span class="text-[12px] truncate" style="color: var(--color-text-secondary);">年度预算</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-5 h-5 shrink-0 flex items-center justify-center text-[10px] font-semibold" style="background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary); border-radius: var(--radius-sm);">3</span>
+                                        <span class="text-[12px] truncate" style="color: var(--color-text-secondary);">招聘流程</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-5 h-5 shrink-0 flex items-center justify-center text-[10px] font-semibold" style="background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary); border-radius: var(--radius-sm);">4</span>
+                                        <span class="text-[12px] truncate" style="color: var(--color-text-secondary);">差旅报销标准</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-5 h-5 shrink-0 flex items-center justify-center text-[10px] font-semibold" style="background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary); border-radius: var(--radius-sm);">5</span>
+                                        <span class="text-[12px] truncate" style="color: var(--color-text-secondary);">保密协议模板</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        /* Sidebar nav active state */
+        .nav-sidebar-item[data-active="true"] {
+            background-color: rgba(255, 255, 255, 0.12);
+            border-left-color: rgba(255, 255, 255, 0.9);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-weight: 600;
+        }
+        .nav-sidebar-item[data-active="false"]:hover {
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+        /* Result card hover */
+        a[data-dom-id="result-item-click"]:hover {
+            border-color: var(--color-primary);
+            background-color: var(--color-primary-subtle);
+        }
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            * { transition-duration: 0.01ms !important; }
+        }
+    </style>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

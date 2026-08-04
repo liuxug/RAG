@@ -1,0 +1,244 @@
+{
+  "search_history": [
+    {
+      "query": "你是用的什么模型？",
+      "user_id": "1",
+      "timestamp": "2026-08-03T15:17:11.011026",
+      "source": "chat"
+    },
+    {
+      "query": "你是什么模型？",
+      "user_id": "1",
+      "timestamp": "2026-08-03T15:11:32.792279",
+      "source": "chat"
+    },
+    {
+      "query": "你好",
+      "user_id": "1",
+      "timestamp": "2026-08-03T15:11:23.164352",
+      "source": "chat"
+    },
+    {
+      "query": "星辰科技有限公司",
+      "user_id": "1",
+      "timestamp": "2026-08-03T10:58:16.002724",
+      "source": "chat"
+    },
+    {
+      "query": "星",
+      "user_id": "1",
+      "timestamp": "2026-08-03T10:57:53.014465",
+      "source": "chat"
+    },
+    {
+      "query": "星辰科技企业成立时间",
+      "user_id": "1",
+      "timestamp": "2026-08-03T10:52:14.717149",
+      "source": "chat"
+    },
+    {
+      "query": "星辰科技企业成立于什么时候？",
+      "user_id": "1",
+      "timestamp": "2026-08-03T10:51:29.757745",
+      "source": "chat"
+    },
+    {
+      "query": "??",
+      "user_id": "1",
+      "timestamp": "2026-08-03T10:44:28.887432",
+      "source": "chat"
+    },
+    {
+      "query": "公司的请假制度是？",
+      "user_id": "1",
+      "timestamp": "2026-07-20T13:10:35.761115",
+      "source": "chat"
+    },
+    {
+      "query": "n",
+      "user_id": "1",
+      "timestamp": "2026-07-20T11:16:42.881844",
+      "source": "search"
+    },
+    {
+      "query": "年假政策有哪些变化？",
+      "user_id": "1",
+      "timestamp": "2026-07-17T14:12:29.107791",
+      "source": "chat"
+    },
+    {
+      "query": "锐视科技有限公司2026年智能摄像头Pro一月份的销售数据",
+      "user_id": "1",
+      "timestamp": "2026-07-17T14:02:20.992064",
+      "source": "chat"
+    },
+    {
+      "query": "介绍一下我们公司的智能客服系统",
+      "user_id": "1",
+      "timestamp": "2026-07-17T11:14:23.643595",
+      "source": "chat"
+    },
+    {
+      "query": "公司的组织架构是？",
+      "user_id": "1",
+      "timestamp": "2026-07-17T11:02:21.259628",
+      "source": "chat"
+    },
+    {
+      "query": "我们公司的阿里云服务器账号密码是什么？",
+      "user_id": "1",
+      "timestamp": "2026-07-17T10:08:26.726138",
+      "source": "chat"
+    },
+    {
+      "query": "node",
+      "user_id": "1",
+      "timestamp": "2026-07-16T13:49:08.925682",
+      "source": "search"
+    },
+    {
+      "query": "nodejs-部署",
+      "user_id": "1",
+      "timestamp": "2026-07-16T13:49:07.945830",
+      "source": "search"
+    },
+    {
+      "query": "nodejs-部署常",
+      "user_id": "1",
+      "timestamp": "2026-07-16T13:49:06.983913",
+      "source": "search"
+    },
+    {
+      "query": "nodejs-部署常见",
+      "user_id": "1",
+      "timestamp": "2026-07-16T13:49:06.227100",
+      "source": "search"
+    },
+    {
+      "query": "nodejs-部署常见.",
+      "user_id": "1",
+      "timestamp": "2026-07-16T13:49:04.936453",
+      "source": "search"
+    },
+    {
+      "query": "nodejs-部署常见.md",
+      "user_id": "1",
+      "timestamp": "2026-07-16T13:48:46.376372",
+      "source": "search"
+    },
+    {
+      "query": "nodejs",
+      "user_id": "1",
+      "timestamp": "2026-07-16T13:27:06.393117",
+      "source": "search"
+    },
+    {
+      "query": "p",
+      "user_id": "1",
+      "timestamp": "2026-07-16T13:09:11.128227",
+      "source": "search"
+    }
+  ],
+  "hot_searches": [
+    {
+      "query": "你好",
+      "count": 8,
+      "last_search": "2026-08-03T15:11:23.165983"
+    },
+    {
+      "query": "nodejs-部署常见.md",
+      "count": 6,
+      "last_search": "2026-07-16T13:48:46.377708"
+    },
+    {
+      "query": "p",
+      "count": 4,
+      "last_search": "2026-07-16T13:09:11.129373"
+    },
+    {
+      "query": "n",
+      "count": 4,
+      "last_search": "2026-07-20T11:16:42.883597"
+    },
+    {
+      "query": "星辰科技企业成立于什么时候？",
+      "count": 3,
+      "last_search": "2026-08-03T10:51:29.759483"
+    },
+    {
+      "query": "node",
+      "count": 2,
+      "last_search": "2026-07-16T13:49:08.927269"
+    },
+    {
+      "query": "nodejs",
+      "count": 1,
+      "last_search": "2026-07-16T13:27:06.394321"
+    },
+    {
+      "query": "nodejs-部署常见.",
+      "count": 1,
+      "last_search": "2026-07-16T13:49:04.937696"
+    },
+    {
+      "query": "nodejs-部署常见",
+      "count": 1,
+      "last_search": "2026-07-16T13:49:06.228343"
+    },
+    {
+      "query": "nodejs-部署常",
+      "count": 1,
+      "last_search": "2026-07-16T13:49:06.985190"
+    },
+    {
+      "query": "nodejs-部署",
+      "count": 1,
+      "last_search": "2026-07-16T13:49:07.947139"
+    },
+    {
+      "query": "我们公司的阿里云服务器账号密码是什么？",
+      "count": 1,
+      "last_search": "2026-07-17T10:08:26.727557"
+    },
+    {
+      "query": "公司的组织架构是？",
+      "count": 1,
+      "last_search": "2026-07-17T11:02:21.261083"
+    },
+    {
+      "query": "介绍一下我们公司的智能客服系统",
+      "count": 1,
+      "last_search": "2026-07-17T11:14:23.645059"
+    },
+    {
+      "query": "锐视科技有限公司2026年智能摄像头Pro一月份的销售数据",
+      "count": 1,
+      "last_search": "2026-07-17T14:02:20.993561"
+    },
+    {
+      "query": "年假政策有哪些变化？",
+      "count": 1,
+      "last_search": "2026-07-17T14:12:29.109338"
+    },
+    {
+      "query": "公司的请假制度是？",
+      "count": 1,
+      "last_search": "2026-07-20T13:10:35.762752"
+    },
+    {
+      "query": "??",
+      "count": 1,
+      "last_search": "2026-08-03T10:44:28.888934"
+    },
+    {
+      "query": "星辰科技企业成立时间",
+      "count": 1,
+      "last_search": "2026-08-03T10:52:14.718749"
+    },
+    {
+      "query": "星",
+      "count": 1,
+      "last_search": "2026-08-03T10:57:53.016040"
+    }
+  ]
+}

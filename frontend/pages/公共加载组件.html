@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公共加载组件</title>
+    <style id="theme-vars">
+/* ===== RAG Document System - Brand Design Tokens ===== */
+:root {
+  /* ── Color System ── */
+  --color-primary: #2B5EA7;
+  --color-primary-hover: #1E4A8A;
+  --color-primary-light: #E8F0FA;
+  --color-primary-subtle: #F0F5FC;
+
+  --color-bg: #F5F7FA;
+  --color-bg-secondary: #FFFFFF;
+  --color-bg-tertiary: #EEF1F6;
+  --color-bg-hover: #F0F2F7;
+
+  --color-text-primary: #1A2332;
+  --color-text-secondary: #5A6B7F;
+  --color-text-tertiary: #8C96A3;
+  --color-text-inverse: #FFFFFF;
+
+  --color-border: #DDE3EB;
+  --color-border-light: #E8ECF1;
+  --color-divider: #F0F2F5;
+
+  /* State colors */
+  --state-success: #2D9B6E;
+  --state-warning: #D4930D;
+  --state-error: #D04848;
+  --state-info: #2B5EA7;
+
+  /* Tag/category colors */
+  --tag-tech: #E8F0FA;
+  --tag-tech-text: #2B5EA7;
+  --tag-hr: #FEF3E2;
+  --tag-hr-text: #B8860B;
+  --tag-finance: #E8F8F0;
+  --tag-finance-text: #2D9B6E;
+  --tag-legal: #F0ECF8;
+  --tag-legal-text: #6B4FA2;
+  --tag-general: #F0F2F5;
+  --tag-general-text: #5A6B7F;
+
+  /* ── Typography ── */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 30px;
+  --font-size-3xl: 36px;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.02em;
+
+  /* ── Spacing ── */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+  --space-4xl: 64px;
+
+  /* ── Radius ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* ── Shadows (static surfaces use border-first; floating layers only) ── */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.05);
+  --shadow-float: 0 8px 32px rgba(0, 0, 0, 0.10);
+
+  /* ── Transitions ── */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+
+  /* ── Z-index ── */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal-backdrop: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+}
+
+/* ── Dark Mode ── */
+html.dark {
+  --color-primary: #5B8FD4;
+  --color-primary-hover: #7AA8E5;
+  --color-primary-light: #1A2F4A;
+  --color-primary-subtle: #15263E;
+
+  --color-bg: #0F1419;
+  --color-bg-secondary: #1A2332;
+  --color-bg-tertiary: #243042;
+  --color-bg-hover: #1E2B3D;
+
+  --color-text-primary: #E8ECF1;
+  --color-text-secondary: #A0AEBE;
+  --color-text-tertiary: #6B7B8D;
+  --color-text-inverse: #1A2332;
+
+  --color-border: #2D3B4E;
+  --color-border-light: #243042;
+  --color-divider: #1E2B3D;
+
+  --state-success: #3CB371;
+  --state-warning: #E6A817;
+  --state-error: #E05555;
+  --state-info: #5B8FD4;
+
+  --tag-tech: #1A2F4A;
+  --tag-tech-text: #5B8FD4;
+  --tag-hr: #2E2410;
+  --tag-hr-text: #E6A817;
+  --tag-finance: #152E22;
+  --tag-finance-text: #3CB371;
+  --tag-legal: #1E1A2E;
+  --tag-legal-text: #9B7FD4;
+  --tag-general: #1E2B3D;
+  --tag-general-text: #A0AEBE;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-float: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-primary: var(--color-primary);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased" style="background:var(--color-bg);">
+    <main>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     Loading Components Showcase — Pure CSS Animations
+     ═══════════════════════════════════════════════════════════════════ -->
+<style>
+/* ── Spinner rotation ── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Double ring: outer clockwise, inner counter-clockwise ── */
+@keyframes spin-cw {
+  to { transform: rotate(360deg); }
+}
+@keyframes spin-ccw {
+  to { transform: rotate(-360deg); }
+}
+
+/* ── Pulse dots bounce ── */
+@keyframes bounce-dot {
+  0%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-8px); }
+}
+
+/* ── Shimmer / skeleton pulse ── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ── Indeterminate progress sliding highlight ── */
+@keyframes indeterminate {
+  0% { left: -30%; width: 30%; }
+  50% { width: 30%; }
+  100% { left: 100%; width: 30%; }
+}
+
+/* ── Active step pulse ring ── */
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(43,94,167,0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(43,94,167,0); }
+  100% { box-shadow: 0 0 0 0 rgba(43,94,167,0); }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Utility: skeleton shimmer bar ── */
+.skeleton-bar {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-tertiary) 25%,
+    var(--color-bg-hover) 50%,
+    var(--color-bg-tertiary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Spinner conic gradient base ── */
+.spinner-conic {
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    var(--color-primary) 75%,
+    transparent 100%
+  );
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+  animation: spin 1s linear infinite;
+}
+
+/* ── Step progress connector ── */
+.step-connector {
+  height: 3px;
+  flex: 1;
+  border-radius: var(--radius-full);
+}
+
+/* ── Progress bar track ── */
+.progress-track {
+  height: 6px;
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+/* ── Indeterminate bar highlight ── */
+.progress-indeterminate::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+  animation: indeterminate 1.5s ease-in-out infinite;
+}
+
+/* ── Circular progress ── */
+.circular-progress {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--color-primary) 0deg,
+    var(--color-primary) 280.8deg,
+    var(--color-bg-tertiary) 280.8deg,
+    var(--color-bg-tertiary) 360deg
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.circular-progress::before {
+  content: '';
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  background: var(--color-bg-secondary);
+  position: absolute;
+}
+
+/* ── Button loading disabled look ── */
+.btn-loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Page overlay scrim ── */
+.page-overlay-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 35, 50, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  z-index: 10;
+}
+</style>
+
+<!-- ── Page Header ── -->
+<div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+  <h1 class="text-center truncate" style="font-size:clamp(28px,3.5vw,48px);font-weight:var(--font-weight-bold);color:var(--color-text-primary);letter-spacing:var(--letter-spacing-tight);line-height:var(--line-height-tight);text-wrap:balance;word-break:keep-all;overflow-wrap:break-word;">
+    公共加载组件
+  </h1>
+  <p class="mx-auto mt-3 max-w-xl text-center truncate" style="font-size:var(--font-size-base);color:var(--color-text-secondary);line-height:var(--line-height-normal);">
+    RAG 文档检索系统 — 加载状态组件规范
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     Row 1: Spinner / Indicator Variants
+     ═══════════════════════════════════════════════════════════════════ -->
+<div class="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
+  <h2 class="mb-4 truncate" style="font-size:var(--font-size-lg);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">旋转 / 指示器</h2>
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+
+    <!-- Card 1 — 基础旋转器 -->
+    <div style="background:var(--color-bg-secondary);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-xl);">
+      <h3 class="truncate" style="font-size:var(--font-size-md);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">基础旋转器 (Spinner)</h3>
+      <p class="mt-1 truncate" style="font-size:var(--font-size-sm);color:var(--color-text-secondary);">用于按钮加载、小型区域等待</p>
+      <div class="mt-6 flex items-end justify-center gap-6" style="min-height:64px;">
+        <div class="flex flex-col items-center gap-2">
+          <div class="spinner-conic" style="width:20px;height:20px;"></div>
+          <span style="font-size:var(--font-size-xs);color:var(--color-text-tertiary);">20px</span>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <div class="spinner-conic" style="width:32px;height:32px;"></div>
+          <span style="font-size:var(--font-size-xs);color:var(--color-text-tertiary);">32px</span>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <div class="spinner-conic" style="width:48px;height:48px;"></div>
+          <span style="font-size:var(--font-size-xs);color:var(--color-text-tertiary);">48px</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 — 双环旋转器 -->
+    <div style="background:var(--color-bg-secondary);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-xl);">
+      <h3 class="truncate" style="font-size:var(--font-size-md);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">双环旋转器 (Double Ring)</h3>
+      <p class="mt-1 truncate" style="font-size:var(--font-size-sm);color:var(--color-text-secondary);">用于页面级加载、内容区块初始化</p>
+      <div class="mt-6 flex items-center justify-center" style="min-height:64px;">
+        <div style="width:48px;height:48px;position:relative;">
+          <!-- Outer ring -->
+          <div style="position:absolute;inset:0;border-radius:50%;border:3px solid transparent;border-top-color:var(--color-primary);border-right-color:var(--color-primary);animation:spin-cw 1s linear infinite;"></div>
+          <!-- Inner ring -->
+          <div style="position:absolute;inset:8px;border-radius:50%;border:2.5px solid transparent;border-bottom-color:var(--color-primary-light);border-left-color:var(--color-primary-light);animation:spin-ccw 0.8s linear infinite;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 — 脉冲点加载器 -->
+    <div style="background:var(--color-bg-secondary);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-xl);">
+      <h3 class="truncate" style="font-size:var(--font-size-md);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">脉冲点加载器 (Pulse Dots)</h3>
+      <p class="mt-1 truncate" style="font-size:var(--font-size-sm);color:var(--color-text-secondary);">用于 AI 对话输入、消息生成等待</p>
+      <div class="mt-6 flex items-center justify-center" style="min-height:64px;">
+        <div class="flex items-center" style="gap:8px;">
+          <div style="width:10px;height:10px;border-radius:50%;background:var(--color-primary);animation:bounce-dot 1.2s ease-in-out infinite;animation-delay:0s;"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:var(--color-primary);animation:bounce-dot 1.2s ease-in-out infinite;animation-delay:0.16s;"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:var(--color-primary);animation:bounce-dot 1.2s ease-in-out infinite;animation-delay:0.32s;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     Row 2: Progress Bar Variants
+     ═══════════════════════════════════════════════════════════════════ -->
+<div class="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
+  <h2 class="mb-4 truncate" style="font-size:var(--font-size-lg);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">进度条</h2>
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+
+    <!-- Card 4 — 线性进度条 -->
+    <div style="background:var(--color-bg-secondary);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-xl);">
+      <h3 class="truncate" style="font-size:var(--font-size-md);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">线性进度条 (Linear Progress)</h3>
+      <p class="mt-1 truncate" style="font-size:var(--font-size-sm);color:var(--color-text-secondary);">用于文件上传、索引构建、批量操作</p>
+      <div class="mt-6 flex flex-col gap-5">
+        <!-- Determinate 65% -->
+        <div>
+          <div class="flex justify-between mb-1">
+            <span style="font-size:var(--font-size-xs);color:var(--color-text-tertiary);">确定性进度</span>
+            <span style="font-size:var(--font-size-xs);color:var(--color-text-secondary);font-weight:var(--font-weight-medium);">65%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" style="width:65%;"></div>
+          </div>
+        </div>
+        <!-- Indeterminate -->
+        <div>
+          <span class="mb-1 block" style="font-size:var(--font-size-xs);color:var(--color-text-tertiary);">不确定性进度</span>
+          <div class="progress-track progress-indeterminate"></div>
+        </div>
+        <!-- Labeled 35% -->
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <span style="font-size:var(--font-size-xs);color:var(--color-primary);font-weight:var(--font-weight-medium);">正在上传文档...</span>
+            <span style="font-size:var(--font-size-xs);color:var(--color-text-secondary);">35%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" style="width:35%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 — 步骤进度条 -->
+    <div style="background:var(--color-bg-secondary);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-xl);">
+      <h3 class="truncate" style="font-size:var(--font-size-md);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">步骤进度条 (Step Progress)</h3>
+      <p class="mt-1 truncate" style="font-size:var(--font-size-sm);color:var(--color-text-secondary);">用于文档处理流程、向量化进度</p>
+      <div class="mt-6 flex flex-col items-center">
+        <div class="flex w-full items-center" style="max-width:320px;">
+          <!-- Step 1: completed -->
+          <div class="flex flex-col items-center" style="min-width:56px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--state-success);display:flex;align-items:center;justify-content:center;">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="mt-1.5 text-center whitespace-nowrap" style="font-size:var(--font-size-xs);color:var(--state-success);font-weight:var(--font-weight-medium);">上传文档</span>
+          </div>
+          <!-- Connector 1: completed -->
+          <div class="step-connector" style="background:var(--state-success);"></div>
+          <!-- Step 2: completed -->
+          <div class="flex flex-col items-center" style="min-width:56px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--state-success);display:flex;align-items:center;justify-content:center;">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="mt-1.5 text-center whitespace-nowrap" style="font-size:var(--font-size-xs);color:var(--state-success);font-weight:var(--font-weight-medium);">解析内容</span>
+          </div>
+          <!-- Connector 2: active -->
+          <div class="step-connector" style="background:var(--color-primary);"></div>
+          <!-- Step 3: active / current -->
+          <div class="flex flex-col items-center" style="min-width:56px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--color-primary);display:flex;align-items:center;justify-content:center;animation:pulse-ring 1.5s ease-out infinite;">
+              <div style="width:8px;height:8px;border-radius:50%;background:white;"></div>
+            </div>
+            <span class="mt-1.5 text-center whitespace-nowrap" style="font-size:var(--font-size-xs);color:var(--color-primary);font-weight:var(--font-weight-semibold);">构建索引</span>
+          </div>
+          <!-- Connector 3: pending -->
+          <div class="step-connector" style="background:var(--color-border);"></div>
+          <!-- Step 4: pending -->
+          <div class="flex flex-col items-center" style="min-width:56px;">
+            <div style="width:28px;height:28px;border-radius:50%;border:2px solid var(--color-border);background:var(--color-bg-secondary);"></div>
+            <span class="mt-1.5 text-center whitespace-nowrap" style="font-size:var(--font-size-xs);color:var(--color-text-tertiary);">完成</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 — 圆形进度条 -->
+    <div style="background:var(--color-bg-secondary);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-xl);">
+      <h3 class="truncate" style="font-size:var(--font-size-md);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">圆形进度条 (Circular Progress)</h3>
+      <p class="mt-1 truncate" style="font-size:var(--font-size-sm);color:var(--color-text-secondary);">用于仪表板指标、总体完成率</p>
+      <div class="mt-6 flex flex-col items-center">
+        <div class="circular-progress">
+          <span style="font-size:28px;font-weight:var(--font-weight-bold);color:var(--color-text-primary);position:relative;z-index:1;">78%</span>
+        </div>
+        <span class="mt-3 whitespace-nowrap" style="font-size:var(--font-size-sm);color:var(--color-text-secondary);">文档索引完成度</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     Row 3: Skeleton / Placeholder Variants
+     ═══════════════════════════════════════════════════════════════════ -->
+<div class="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
+  <h2 class="mb-4 truncate" style="font-size:var(--font-size-lg);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">骨架屏</h2>
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+
+    <!-- Card 7 — 表格骨架屏 -->
+    <div style="background:var(--color-bg-secondary);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-xl);">
+      <h3 class="truncate" style="font-size:var(--font-size-md);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">表格骨架屏 (Table Skeleton)</h3>
+      <p class="mt-1 truncate" style="font-size:var(--font-size-sm);color:var(--color-text-secondary);">用于文档列表、用户列表等表格加载</p>
+      <div class="mt-5 flex flex-col gap-3">
+        <!-- Header row -->
+        <div class="flex items-center gap-3">
+          <div class="skeleton-bar" style="width:60px;height:12px;"></div>
+          <div class="skeleton-bar" style="width:80px;height:12px;"></div>
+          <div class="skeleton-bar" style="width:50px;height:12px;"></div>
+          <div class="skeleton-bar" style="width:70px;height:12px;"></div>
+          <div class="skeleton-bar" style="width:40px;height:12px;"></div>
+        </div>
+        <!-- Data rows -->
+        <div class="flex items-center gap-3">
+          <div class="skeleton-bar" style="width:20px;height:20px;border-radius:50%;flex-shrink:0;"></div>
+          <div class="skeleton-bar" style="width:120px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:90px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:60px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:50px;height:10px;"></div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="skeleton-bar" style="width:20px;height:20px;border-radius:50%;flex-shrink:0;"></div>
+          <div class="skeleton-bar" style="width:100px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:70px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:55px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:45px;height:10px;"></div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="skeleton-bar" style="width:20px;height:20px;border-radius:50%;flex-shrink:0;"></div>
+          <div class="skeleton-bar" style="width:130px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:85px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:65px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:40px;height:10px;"></div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="skeleton-bar" style="width:20px;height:20px;border-radius:50%;flex-shrink:0;"></div>
+          <div class="skeleton-bar" style="width:110px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:75px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:50px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:55px;height:10px;"></div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="skeleton-bar" style="width:20px;height:20px;border-radius:50%;flex-shrink:0;"></div>
+          <div class="skeleton-bar" style="width:95px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:65px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:70px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:48px;height:10px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 8 — 卡片骨架屏 -->
+    <div style="background:var(--color-bg-secondary);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-xl);">
+      <h3 class="truncate" style="font-size:var(--font-size-md);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">卡片骨架屏 (Card Skeleton)</h3>
+      <p class="mt-1 truncate" style="font-size:var(--font-size-sm);color:var(--color-text-secondary);">用于文档卡片、搜索结果预览加载</p>
+      <div class="mt-5 grid grid-cols-2 gap-4">
+        <!-- Card skeleton 1 -->
+        <div style="background:var(--color-bg);border-radius:var(--radius-md);padding:var(--space-md);">
+          <div class="skeleton-bar" style="width:100%;height:64px;border-radius:var(--radius-sm);"></div>
+          <div class="mt-3 skeleton-bar" style="width:70%;height:12px;"></div>
+          <div class="mt-2 skeleton-bar" style="width:100%;height:8px;"></div>
+          <div class="mt-1.5 skeleton-bar" style="width:85%;height:8px;"></div>
+          <div class="mt-3 flex gap-2">
+            <div class="skeleton-bar" style="width:36px;height:18px;border-radius:var(--radius-full);"></div>
+            <div class="skeleton-bar" style="width:28px;height:18px;border-radius:var(--radius-full);"></div>
+            <div class="skeleton-bar" style="width:44px;height:18px;border-radius:var(--radius-full);"></div>
+          </div>
+        </div>
+        <!-- Card skeleton 2 -->
+        <div style="background:var(--color-bg);border-radius:var(--radius-md);padding:var(--space-md);">
+          <div class="skeleton-bar" style="width:100%;height:64px;border-radius:var(--radius-sm);"></div>
+          <div class="mt-3 skeleton-bar" style="width:60%;height:12px;"></div>
+          <div class="mt-2 skeleton-bar" style="width:90%;height:8px;"></div>
+          <div class="mt-1.5 skeleton-bar" style="width:75%;height:8px;"></div>
+          <div class="mt-3 flex gap-2">
+            <div class="skeleton-bar" style="width:40px;height:18px;border-radius:var(--radius-full);"></div>
+            <div class="skeleton-bar" style="width:32px;height:18px;border-radius:var(--radius-full);"></div>
+            <div class="skeleton-bar" style="width:38px;height:18px;border-radius:var(--radius-full);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 9 — 详情页骨架屏 -->
+    <div style="background:var(--color-bg-secondary);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-xl);">
+      <h3 class="truncate" style="font-size:var(--font-size-md);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">详情页骨架屏 (Detail Skeleton)</h3>
+      <p class="mt-1 truncate" style="font-size:var(--font-size-sm);color:var(--color-text-secondary);">用于文档详情、设置页面加载</p>
+      <div class="mt-5 flex gap-4">
+        <!-- Left column 60% -->
+        <div class="flex flex-col gap-2" style="flex:6;">
+          <div class="skeleton-bar" style="width:80%;height:14px;"></div>
+          <div class="skeleton-bar" style="width:100%;height:8px;"></div>
+          <div class="skeleton-bar" style="width:95%;height:8px;"></div>
+          <div class="skeleton-bar" style="width:100%;height:8px;"></div>
+          <div class="skeleton-bar" style="width:60%;height:8px;"></div>
+          <div class="skeleton-bar" style="width:100%;height:8px;"></div>
+          <div class="skeleton-bar" style="width:90%;height:8px;"></div>
+          <div class="skeleton-bar" style="width:75%;height:8px;"></div>
+          <div class="skeleton-bar" style="width:100%;height:8px;"></div>
+          <div class="skeleton-bar" style="width:55%;height:8px;"></div>
+        </div>
+        <!-- Right column 40% -->
+        <div class="flex flex-col gap-2" style="flex:4;">
+          <div class="skeleton-bar" style="width:60%;height:12px;"></div>
+          <div class="flex flex-col gap-1.5 mt-2" style="background:var(--color-bg);border-radius:var(--radius-sm);padding:var(--space-sm);">
+            <div class="flex items-center gap-2">
+              <div class="skeleton-bar" style="width:32px;height:8px;"></div>
+              <div class="skeleton-bar" style="width:60px;height:8px;"></div>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="skeleton-bar" style="width:28px;height:8px;"></div>
+              <div class="skeleton-bar" style="width:50px;height:8px;"></div>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="skeleton-bar" style="width:36px;height:8px;"></div>
+              <div class="skeleton-bar" style="width:55px;height:8px;"></div>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="skeleton-bar" style="width:24px;height:8px;"></div>
+              <div class="skeleton-bar" style="width:65px;height:8px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     Row 4: Full-page Loading States
+     ═══════════════════════════════════════════════════════════════════ -->
+<div class="mx-auto max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
+  <h2 class="mb-4 truncate" style="font-size:var(--font-size-lg);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">整页加载</h2>
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+
+    <!-- Card 10 — 页面加载遮罩 -->
+    <div style="background:var(--color-bg-secondary);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-xl);">
+      <h3 class="truncate" style="font-size:var(--font-size-md);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">页面加载遮罩 (Page Overlay)</h3>
+      <p class="mt-1 truncate" style="font-size:var(--font-size-sm);color:var(--color-text-secondary);">用于首次进入页面、路由切换</p>
+      <div class="mt-5 relative" style="min-height:200px;background:var(--color-bg);border-radius:var(--radius-md);padding:var(--space-md);overflow:hidden;">
+        <!-- Mock background page -->
+        <div class="skeleton-bar" style="width:40%;height:14px;"></div>
+        <div class="mt-3 skeleton-bar" style="width:100%;height:8px;"></div>
+        <div class="mt-2 flex gap-3">
+          <div class="skeleton-bar" style="width:60px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:80px;height:10px;"></div>
+          <div class="skeleton-bar" style="width:50px;height:10px;"></div>
+        </div>
+        <div class="mt-3 flex items-center gap-3">
+          <div class="skeleton-bar" style="width:20px;height:20px;border-radius:50%;flex-shrink:0;"></div>
+          <div class="skeleton-bar" style="width:120px;height:8px;"></div>
+          <div class="skeleton-bar" style="width:60px;height:8px;"></div>
+        </div>
+        <div class="mt-2 flex items-center gap-3">
+          <div class="skeleton-bar" style="width:20px;height:20px;border-radius:50%;flex-shrink:0;"></div>
+          <div class="skeleton-bar" style="width:100px;height:8px;"></div>
+          <div class="skeleton-bar" style="width:50px;height:8px;"></div>
+        </div>
+        <!-- Overlay scrim -->
+        <div class="page-overlay-scrim">
+          <!-- Double ring spinner -->
+          <div style="width:48px;height:48px;position:relative;">
+            <div style="position:absolute;inset:0;border-radius:50%;border:3px solid transparent;border-top-color:white;border-right-color:white;animation:spin-cw 1s linear infinite;"></div>
+            <div style="position:absolute;inset:8px;border-radius:50%;border:2.5px solid transparent;border-bottom-color:rgba(255,255,255,0.5);border-left-color:rgba(255,255,255,0.5);animation:spin-ccw 0.8s linear infinite;"></div>
+          </div>
+          <span class="mt-3 whitespace-nowrap" style="font-size:var(--font-size-sm);color:white;font-weight:var(--font-weight-medium);">正在加载文档列表...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 11 — 区块加载遮罩 -->
+    <div style="background:var(--color-bg-secondary);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-xl);">
+      <h3 class="truncate" style="font-size:var(--font-size-md);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">区块加载遮罩 (Block Loading)</h3>
+      <p class="mt-1 truncate" style="font-size:var(--font-size-sm);color:var(--color-text-secondary);">用于局部内容刷新、筛选后重新加载</p>
+      <div class="mt-5" style="min-height:200px;border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden;">
+        <!-- Visible header -->
+        <div class="flex items-center justify-between" style="padding:var(--space-md) var(--space-lg);border-bottom:1px solid var(--color-border);">
+          <span style="font-size:var(--font-size-base);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">文档列表</span>
+          <span style="font-size:var(--font-size-xs);color:var(--color-text-tertiary);">12 条记录</span>
+        </div>
+        <!-- Block loading content -->
+        <div class="flex flex-col items-center justify-center" style="min-height:148px;">
+          <div class="spinner-conic" style="width:32px;height:32px;"></div>
+          <span class="mt-3 whitespace-nowrap" style="font-size:var(--font-size-sm);color:var(--color-text-secondary);">数据加载中...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 12 — 按钮加载状态 -->
+    <div style="background:var(--color-bg-secondary);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-xl);">
+      <h3 class="truncate" style="font-size:var(--font-size-md);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">按钮加载状态 (Button Loading)</h3>
+      <p class="mt-1 truncate" style="font-size:var(--font-size-sm);color:var(--color-text-secondary);">用于表单提交、异步操作按钮</p>
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+        <!-- Primary button loading -->
+        <div class="btn-loading flex items-center justify-center" style="height:40px;padding:0 var(--space-xl);background:var(--color-primary);border-radius:var(--radius-md);">
+          <div style="width:18px;height:18px;border-radius:50%;border:2.5px solid transparent;border-top-color:white;border-right-color:white;animation:spin-cw 0.8s linear infinite;"></div>
+        </div>
+        <!-- Ghost button loading -->
+        <div class="btn-loading flex items-center justify-center" style="height:40px;padding:0 var(--space-xl);background:transparent;border:1.5px solid var(--color-primary);border-radius:var(--radius-md);">
+          <div style="width:18px;height:18px;border-radius:50%;border:2.5px solid transparent;border-top-color:var(--color-primary);border-right-color:var(--color-primary);animation:spin-cw 0.8s linear infinite;"></div>
+        </div>
+        <!-- Small icon button loading -->
+        <div class="btn-loading flex items-center justify-center" style="width:36px;height:36px;background:transparent;border:1.5px solid var(--color-primary);border-radius:50%;">
+          <div style="width:16px;height:16px;border-radius:50%;border:2px solid transparent;border-top-color:var(--color-primary);border-right-color:var(--color-primary);animation:spin-cw 0.8s linear infinite;"></div>
+        </div>
+      </div>
+      <!-- Labels under buttons -->
+      <div class="mt-3 flex flex-wrap items-center justify-center gap-4">
+        <span style="font-size:var(--font-size-xs);color:var(--color-text-tertiary);width:80px;text-align:center;">主要按钮</span>
+        <span style="font-size:var(--font-size-xs);color:var(--color-text-tertiary);width:80px;text-align:center;">幽灵按钮</span>
+        <span style="font-size:var(--font-size-xs);color:var(--color-text-tertiary);width:36px;text-align:center;"></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

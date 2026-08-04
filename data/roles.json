@@ -1,0 +1,130 @@
+[
+  {
+    "id": "1",
+    "name": "超级管理员",
+    "description": "拥有系统全部权限，可管理所有用户和配置",
+    "permissions": [
+      "doc_view",
+      "doc_upload",
+      "doc_edit",
+      "doc_delete",
+      "doc_download",
+      "doc_review",
+      "doc_publish",
+      "doc_comment",
+      "user_view",
+      "user_create",
+      "user_edit",
+      "user_delete",
+      "user_disable",
+      "role_view",
+      "role_create",
+      "role_edit",
+      "role_delete",
+      "role_disable",
+      "search",
+      "chat",
+      "knowledge_graph",
+      "recommend",
+      "stats_view",
+      "system_settings",
+      "llm_switch",
+      "history_view",
+      "history_manage"
+    ],
+    "members": 2,
+    "status": "active",
+    "is_built_in": true,
+    "created_at": "2026-07-15T15:30:36.720274",
+    "updated_at": "2026-07-15T15:30:36.720285"
+  },
+  {
+    "id": "2",
+    "name": "知识库管理员",
+    "description": "管理文档库的分类、上传审核及内容发布",
+    "permissions": [
+      "doc_view",
+      "search",
+      "chat",
+      "knowledge_graph",
+      "recommend",
+      "stats_view",
+      "role_view",
+      "user_view"
+    ],
+    "members": 5,
+    "status": "active",
+    "is_built_in": false,
+    "created_at": "2026-07-15T15:30:36.720291",
+    "updated_at": "2026-07-16T15:46:10.760525",
+    "permissions_count": 8
+  },
+  {
+    "id": "3",
+    "name": "普通用户",
+    "description": "可浏览、检索文档和使用AI对话功能",
+    "permissions": [
+      "doc_view",
+      "doc_download",
+      "doc_comment",
+      "search",
+      "chat",
+      "recommend",
+      "history_view"
+    ],
+    "members": 128,
+    "status": "active",
+    "is_built_in": false,
+    "created_at": "2026-07-15T15:30:36.720297",
+    "updated_at": "2026-07-15T15:30:36.720299"
+  },
+  {
+    "id": "4",
+    "name": "审核员",
+    "description": "负责文档内容的审核与质量把控",
+    "permissions": [
+      "doc_view",
+      "doc_download",
+      "doc_review",
+      "doc_publish",
+      "doc_comment",
+      "stats_view"
+    ],
+    "members": 8,
+    "status": "active",
+    "is_built_in": false,
+    "created_at": "2026-07-15T15:30:36.720303",
+    "updated_at": "2026-07-15T15:30:36.720305"
+  },
+  {
+    "id": "5",
+    "name": "外部访客",
+    "description": "仅可访问公开文档，无上传和下载权限",
+    "permissions": [
+      "doc_view",
+      "search",
+      "chat"
+    ],
+    "members": 15,
+    "status": "active",
+    "is_built_in": false,
+    "created_at": "2026-07-15T15:30:36.720309",
+    "updated_at": "2026-07-15T15:30:36.720311"
+  },
+  {
+    "id": "6",
+    "name": "数据分析师",
+    "description": "可访问数据统计和报表分析功能",
+    "permissions": [
+      "doc_view",
+      "stats_view",
+      "knowledge_graph",
+      "recommend"
+    ],
+    "members": 0,
+    "status": "active",
+    "is_built_in": false,
+    "created_at": "2026-07-15T15:30:36.720314",
+    "updated_at": "2026-07-16T13:59:54.559322"
+  }
+]

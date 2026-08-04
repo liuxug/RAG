@@ -1,0 +1,35 @@
+[
+  {
+    "id": "1",
+    "username": "admin",
+    "email": "admin@example.com",
+    "hashed_password": "$pbkdf2-sha256$29000$JARg7F1L6R3D2HtPqZWSkg$F7zR9bSQ3E7PQ0I4qnICNtykay.vTY5L6dnPAKjDhlA",
+    "created_at": "2026-07-13T14:06:06.374768",
+    "last_login": "2026-08-03T17:24:54.018608",
+    "is_active": true,
+    "role": "超级管理员",
+    "department": "技术部"
+  },
+  {
+    "id": "2",
+    "username": "前端张阳",
+    "email": "2470644228@qq.com",
+    "hashed_password": "$pbkdf2-sha256$29000$tBbinLMWAqD03vv/H2OslQ$T1n7IbNN22OStFQs8thvKkz66xXy6E1H48MNAwne7/E",
+    "created_at": "2026-07-13T14:23:18.395264",
+    "last_login": "2026-07-17T09:37:40.047305",
+    "is_active": true,
+    "role": "知识库管理员",
+    "department": "技术部"
+  },
+  {
+    "id": "3",
+    "username": "经理小陈",
+    "email": "663945676@qq.com",
+    "hashed_password": "$pbkdf2-sha256$29000$kemzaWVmU+2EMN2oEGp2MA==$8G9DZLPpLEo4vtdBAn8b3sjWLU8roiLTnVAFcbWvgAk=",
+    "role": "知识库管理员",
+    "department": "技术部",
+    "is_active": true,
+    "created_at": "2026-07-16T14:46:32.197485",
+    "last_login": ""
+  }
+]

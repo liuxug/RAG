@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" class="light" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - RAG 知识库</title>
+    <style id="theme-vars">
+/* ===== RAG Document System - Brand Design Tokens ===== */
+:root {
+  /* ── Color System ── */
+  --color-primary: #2B5EA7;
+  --color-primary-hover: #1E4A8A;
+  --color-primary-light: #E8F0FA;
+  --color-primary-subtle: #F0F5FC;
+
+  --color-bg: #F5F7FA;
+  --color-bg-secondary: #FFFFFF;
+  --color-bg-tertiary: #EEF1F6;
+  --color-bg-hover: #F0F2F7;
+
+  --color-text-primary: #1A2332;
+  --color-text-secondary: #5A6B7F;
+  --color-text-tertiary: #8C96A3;
+  --color-text-inverse: #FFFFFF;
+
+  --color-border: #DDE3EB;
+  --color-border-light: #E8ECF1;
+  --color-divider: #F0F2F5;
+
+  /* State colors */
+  --state-success: #2D9B6E;
+  --state-warning: #D4930D;
+  --state-error: #D04848;
+  --state-info: #2B5EA7;
+
+  /* Tag/category colors */
+  --tag-tech: #E8F0FA;
+  --tag-tech-text: #2B5EA7;
+  --tag-hr: #FEF3E2;
+  --tag-hr-text: #B8860B;
+  --tag-finance: #E8F8F0;
+  --tag-finance-text: #2D9B6E;
+  --tag-legal: #F0ECF8;
+  --tag-legal-text: #6B4FA2;
+  --tag-general: #F0F2F5;
+  --tag-general-text: #5A6B7F;
+
+  /* ── Typography ── */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 30px;
+  --font-size-3xl: 36px;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.02em;
+
+  /* ── Spacing ── */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+  --space-4xl: 64px;
+
+  /* ── Radius ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* ── Shadows (static surfaces use border-first; floating layers only) ── */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.05);
+  --shadow-float: 0 8px 32px rgba(0, 0, 0, 0.10);
+
+  /* ── Transitions ── */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+
+  /* ── Z-index ── */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal-backdrop: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+}
+
+/* ── Dark Mode ── */
+html.dark {
+  --color-primary: #5B8FD4;
+  --color-primary-hover: #7AA8E5;
+  --color-primary-light: #1A2F4A;
+  --color-primary-subtle: #15263E;
+
+  --color-bg: #0F1419;
+  --color-bg-secondary: #1A2332;
+  --color-bg-tertiary: #243042;
+  --color-bg-hover: #1E2B3D;
+
+  --color-text-primary: #E8ECF1;
+  --color-text-secondary: #A0AEBE;
+  --color-text-tertiary: #6B7B8D;
+  --color-text-inverse: #1A2332;
+
+  --color-border: #2D3B4E;
+  --color-border-light: #243042;
+  --color-divider: #1E2B3D;
+
+  --state-success: #3CB371;
+  --state-warning: #E6A817;
+  --state-error: #E05555;
+  --state-info: #5B8FD4;
+
+  --tag-tech: #1A2F4A;
+  --tag-tech-text: #5B8FD4;
+  --tag-hr: #2E2410;
+  --tag-hr-text: #E6A817;
+  --tag-finance: #152E22;
+  --tag-finance-text: #3CB371;
+  --tag-legal: #1E1A2E;
+  --tag-legal-text: #9B7FD4;
+  --tag-general: #1E2B3D;
+  --tag-general-text: #A0AEBE;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-float: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-primary: var(--color-primary);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main class="flex min-h-screen">
+      <!-- Left Panel: Brand Area (60%) -->
+      <div class="hidden lg:flex lg:w-[60%] flex-col justify-center items-center px-16 relative" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);">
+        <!-- Decorative subtle circles -->
+        <div class="absolute top-12 left-12 w-40 h-40 rounded-full opacity-10" style="background: var(--color-text-inverse);"></div>
+        <div class="absolute bottom-16 right-20 w-56 h-56 rounded-full opacity-[0.07]" style="background: var(--color-text-inverse);"></div>
+
+        <div class="relative z-10 text-center max-w-md">
+          <!-- Logo Icon -->
+          <div class="flex justify-center mb-8">
+            <div class="w-20 h-20 rounded-2xl flex items-center justify-center" style="background: rgba(255,255,255,0.15);">
+              <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Brand Name -->
+          <h1 class="text-white mb-3 font-semibold" style="font-size: var(--font-size-2xl); letter-spacing: var(--letter-spacing-tight);">RAG 知识库</h1>
+
+          <!-- Tagline -->
+          <p class="text-white mb-12" style="font-size: var(--font-size-md); opacity: 0.7;">企业级智能文档检索与管理平台</p>
+
+          <!-- Feature Bullets -->
+          <div class="flex flex-col gap-5 text-left max-w-xs mx-auto">
+            <div class="flex items-start gap-3">
+              <div class="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: rgba(255,255,255,0.2);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <p class="text-white" style="font-size: var(--font-size-base); opacity: 0.85; line-height: var(--line-height-normal);">基于 RAG 的智能检索，精准定位文档内容</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: rgba(255,255,255,0.2);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <p class="text-white" style="font-size: var(--font-size-base); opacity: 0.85; line-height: var(--line-height-normal);">支持多格式文档管理与知识沉淀</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: rgba(255,255,255,0.2);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <p class="text-white" style="font-size: var(--font-size-base); opacity: 0.85; line-height: var(--line-height-normal);">AI 驱动的文档问答与知识图谱</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel: Login Form (40%) -->
+      <div class="flex-1 flex flex-col justify-center items-center px-6 py-12 lg:px-16" style="background: var(--color-bg-secondary);">
+        <!-- Mobile-only brand display -->
+        <div class="lg:hidden flex flex-col items-center mb-8">
+          <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-3" style="background: var(--color-primary);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <span class="font-semibold" style="font-size: var(--font-size-xl); color: var(--color-text-primary);">RAG 知识库</span>
+        </div>
+
+        <!-- Login Card -->
+        <div class="w-full" style="max-width: 380px;">
+          <!-- Header -->
+          <div class="mb-8">
+            <h2 class="font-semibold mb-2" style="font-size: var(--font-size-xl); color: var(--color-text-primary);">欢迎回来</h2>
+            <p style="font-size: var(--font-size-base); color: var(--color-text-secondary);">请登录您的账户以继续使用</p>
+          </div>
+
+          <!-- Login Form -->
+          <form class="flex flex-col gap-5" onsubmit="return false;">
+            <!-- Username Field -->
+            <div class="flex flex-col gap-1.5">
+              <label class="font-medium" style="font-size: var(--font-size-sm); color: var(--color-text-primary);">用户名</label>
+              <div class="login-input-wrap flex items-center border rounded-md transition-colors" style="border-color: var(--color-border); height: 44px;">
+                <div class="flex items-center justify-center pl-3 pr-2" style="color: var(--color-text-tertiary);">
+                  <i data-lucide="user" style="width: 18px; height: 18px;"></i>
+                </div>
+                <input
+                  type="text"
+                  placeholder="请输入用户名"
+                  class="flex-1 h-full outline-none bg-transparent pr-3"
+                  style="font-size: var(--font-size-base); color: var(--color-text-primary);"
+                />
+              </div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="flex flex-col gap-1.5">
+              <label class="font-medium" style="font-size: var(--font-size-sm); color: var(--color-text-primary);">密码</label>
+              <div class="login-input-wrap flex items-center border rounded-md transition-colors" style="border-color: var(--color-border); height: 44px;">
+                <div class="flex items-center justify-center pl-3 pr-2" style="color: var(--color-text-tertiary);">
+                  <i data-lucide="lock" style="width: 18px; height: 18px;"></i>
+                </div>
+                <input
+                  type="password"
+                  placeholder="请输入密码"
+                  class="flex-1 h-full outline-none bg-transparent pr-3"
+                  style="font-size: var(--font-size-base); color: var(--color-text-primary);"
+                />
+                <button type="button" class="flex items-center justify-center pr-3" style="color: var(--color-text-tertiary);" aria-label="显示密码">
+                  <i data-lucide="eye-off" style="width: 18px; height: 18px;"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Remember + Forgot Row -->
+            <div class="flex items-center justify-between">
+              <label class="flex items-center gap-2 cursor-pointer" style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+                <input type="checkbox" class="w-4 h-4 rounded" style="accent-color: var(--color-primary);" />
+                <span>记住我</span>
+              </label>
+              <a href="#" class="font-medium transition-colors" style="font-size: var(--font-size-sm); color: var(--color-primary);">忘记密码?</a>
+            </div>
+
+            <!-- Login Button -->
+            <button
+              type="submit"
+              class="w-full flex items-center justify-center font-semibold rounded-md transition-colors cursor-pointer"
+              style="height: 44px; background: var(--color-primary); color: var(--color-text-inverse); font-size: var(--font-size-base); border-radius: var(--radius-md);"
+              onmouseover="this.style.background='var(--color-primary-hover)'"
+              onmouseout="this.style.background='var(--color-primary)'"
+            >登 录</button>
+
+            <!-- Divider -->
+            <div class="flex items-center gap-4 my-1">
+              <div class="flex-1 h-px" style="background: var(--color-border);"></div>
+              <span style="font-size: var(--font-size-sm); color: var(--color-text-tertiary);">或</span>
+              <div class="flex-1 h-px" style="background: var(--color-border);"></div>
+            </div>
+
+            <!-- SSO Button -->
+            <button
+              type="button"
+              class="w-full flex items-center justify-center gap-2 border rounded-md font-medium transition-colors cursor-pointer"
+              style="height: 44px; background: transparent; color: var(--color-text-secondary); font-size: var(--font-size-base); border-color: var(--color-border); border-radius: var(--radius-md);"
+              onmouseover="this.style.background='var(--color-bg-hover)'"
+              onmouseout="this.style.background='transparent'"
+            >
+              <i data-lucide="building-2" style="width: 18px; height: 18px;"></i>
+              <span>企业 SSO 登录</span>
+            </button>
+          </form>
+
+          <!-- Footer -->
+          <div class="flex items-center justify-center gap-1 mt-8" style="font-size: var(--font-size-base); color: var(--color-text-secondary);">
+            <span>还没有账户？</span>
+            <a href="#" data-dom-id="goto-register" class="font-medium transition-colors" style="color: var(--color-primary);">立即注册</a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <style>
+      .login-input-wrap:focus-within {
+        border-color: var(--color-primary);
+      }
+    </style>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

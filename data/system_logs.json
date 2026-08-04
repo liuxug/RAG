@@ -1,0 +1,794 @@
+{
+  "logs": [
+    {
+      "id": "1785749094.032689",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-08-03T17:24:54.032697"
+    },
+    {
+      "id": "1785741431.016283",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "你是用的什么模型？",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 2.56s",
+      "timestamp": "2026-08-03T15:17:11.016288"
+    },
+    {
+      "id": "1785741092.797104",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "你是什么模型？",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 1.21s",
+      "timestamp": "2026-08-03T15:11:32.797110"
+    },
+    {
+      "id": "1785741083.169208",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "你好",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 4.89s",
+      "timestamp": "2026-08-03T15:11:23.169213"
+    },
+    {
+      "id": "1785740098.828881",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "你好",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 4.82s",
+      "timestamp": "2026-08-03T14:54:58.828886"
+    },
+    {
+      "id": "1785739939.264322",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-08-03T14:52:19.264330"
+    },
+    {
+      "id": "1785725896.007614",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "星辰科技有限公司",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 3.28s",
+      "timestamp": "2026-08-03T10:58:16.007620"
+    },
+    {
+      "id": "1785725892.718388",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "星辰科技有限公司",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 3.87s",
+      "timestamp": "2026-08-03T10:58:12.718394"
+    },
+    {
+      "id": "1785725888.840992",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "星辰科技有限公司",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 4.28s",
+      "timestamp": "2026-08-03T10:58:08.840997"
+    },
+    {
+      "id": "1785725884.553804",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "星辰科技有限公司",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 3.2s",
+      "timestamp": "2026-08-03T10:58:04.553811"
+    },
+    {
+      "id": "1785725881.347841",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "星辰科技有限公司",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 2.58s",
+      "timestamp": "2026-08-03T10:58:01.347847"
+    },
+    {
+      "id": "1785725878.753081",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "星辰科技有限公司",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 3.35s",
+      "timestamp": "2026-08-03T10:57:58.753088"
+    },
+    {
+      "id": "1785725873.018998",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "星",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 3.48s",
+      "timestamp": "2026-08-03T10:57:53.019004"
+    },
+    {
+      "id": "1785725772.919459",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "你好",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 2.52s",
+      "timestamp": "2026-08-03T10:56:12.919465"
+    },
+    {
+      "id": "1785725534.721676",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "星辰科技企业成立时间",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 2.64s",
+      "timestamp": "2026-08-03T10:52:14.721681"
+    },
+    {
+      "id": "1785725489.76242",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "星辰科技企业成立于什么时候？",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 2.62s",
+      "timestamp": "2026-08-03T10:51:29.762426"
+    },
+    {
+      "id": "1785725461.888015",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "你好",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 2.39s",
+      "timestamp": "2026-08-03T10:51:01.888021"
+    },
+    {
+      "id": "1785725452.259936",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-08-03T10:50:52.259944"
+    },
+    {
+      "id": "1785725068.891942",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "??",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 1.58s",
+      "timestamp": "2026-08-03T10:44:28.891947"
+    },
+    {
+      "id": "1785725067.282126",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-08-03T10:44:27.282133"
+    },
+    {
+      "id": "1785724964.346587",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "你好",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 0.69s",
+      "timestamp": "2026-08-03T10:42:44.346592"
+    },
+    {
+      "id": "1785724962.944632",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "你好",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 42.87s",
+      "timestamp": "2026-08-03T10:42:42.944637"
+    },
+    {
+      "id": "1785724833.568122",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "你好",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 0.45s",
+      "timestamp": "2026-08-03T10:40:33.568127"
+    },
+    {
+      "id": "1785724825.439513",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "你好",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 0.41s",
+      "timestamp": "2026-08-03T10:40:25.439518"
+    },
+    {
+      "id": "1785724797.6453",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-08-03T10:39:57.645307"
+    },
+    {
+      "id": "1785724553.742908",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "星辰科技企业成立于什么时候？",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 0.39s",
+      "timestamp": "2026-08-03T10:35:53.742913"
+    },
+    {
+      "id": "1785724544.234133",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "星辰科技企业成立于什么时候？",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 1.64s",
+      "timestamp": "2026-08-03T10:35:44.234138"
+    },
+    {
+      "id": "1785724403.215809",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-08-03T10:33:23.215817"
+    },
+    {
+      "id": "1785724391.362797",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-08-03T10:33:11.362806"
+    },
+    {
+      "id": "1784524235.765871",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "公司的请假制度是？",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 4.83s",
+      "timestamp": "2026-07-20T13:10:35.765877"
+    },
+    {
+      "id": "1784513359.000299",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-20T10:09:19.000306"
+    },
+    {
+      "id": "1784271905.9447",
+      "user_id": "1",
+      "username": "admin",
+      "action": "上传",
+      "target": "锐视科技客户服务工单统计.ods",
+      "target_type": "document",
+      "detail": "上传文档，共 1 个片段",
+      "timestamp": "2026-07-17T15:05:05.944707"
+    },
+    {
+      "id": "1784271885.38295",
+      "user_id": "1",
+      "username": "admin",
+      "action": "上传",
+      "target": "锐视科技数据安全管理制度V3.0.odt",
+      "target_type": "document",
+      "detail": "上传文档，共 3 个片段",
+      "timestamp": "2026-07-17T15:04:45.382958"
+    },
+    {
+      "id": "1784271450.848757",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-17T14:57:30.848763"
+    },
+    {
+      "id": "1784268749.11213",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "年假政策有哪些变化？",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 2.49s",
+      "timestamp": "2026-07-17T14:12:29.112134"
+    },
+    {
+      "id": "1784268140.997201",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "锐视科技有限公司2026年智能摄像头Pro一月份的销售数据",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 2.62s",
+      "timestamp": "2026-07-17T14:02:20.997206"
+    },
+    {
+      "id": "1784268090.645994",
+      "user_id": "1",
+      "username": "admin",
+      "action": "批准",
+      "target": "锐视科技2026上半年销售与运营数据.xlsx",
+      "target_type": "document",
+      "detail": "批准文档: 锐视科技2026上半年销售与运营数据.xlsx",
+      "timestamp": "2026-07-17T14:01:30.646000"
+    },
+    {
+      "id": "1784268022.99762",
+      "user_id": "1",
+      "username": "admin",
+      "action": "上传",
+      "target": "锐视科技2026上半年销售与运营数据.xlsx",
+      "target_type": "document",
+      "detail": "上传文档，共 4 个片段",
+      "timestamp": "2026-07-17T14:00:22.997627"
+    },
+    {
+      "id": "1784267942.709503",
+      "user_id": "1",
+      "username": "admin",
+      "action": "上传",
+      "target": "蓝海集团2026年度战略规划会议纪要.docx",
+      "target_type": "document",
+      "detail": "上传文档，共 5 个片段",
+      "timestamp": "2026-07-17T13:59:02.709511"
+    },
+    {
+      "id": "1784267597.039342",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-17T13:53:17.039350"
+    },
+    {
+      "id": "1784258063.649242",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "介绍一下我们公司的智能客服系统",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 17.23s",
+      "timestamp": "2026-07-17T11:14:23.649247"
+    },
+    {
+      "id": "1784257341.264631",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "公司的组织架构是？",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 19.91s",
+      "timestamp": "2026-07-17T11:02:21.264636"
+    },
+    {
+      "id": "1784257266.255208",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-17T11:01:06.255215"
+    },
+    {
+      "id": "1784256498.311926",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-17T10:48:18.311934"
+    },
+    {
+      "id": "1784254106.729994",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "我们公司的阿里云服务器账号密码是什么？",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 17.1s",
+      "timestamp": "2026-07-17T10:08:26.730000"
+    },
+    {
+      "id": "1784254043.258713",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-17T10:07:23.258721"
+    },
+    {
+      "id": "1784252483.03557",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-17T09:41:23.035577"
+    },
+    {
+      "id": "1784252260.049093",
+      "user_id": "2",
+      "username": "前端张阳",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-17T09:37:40.049100"
+    },
+    {
+      "id": "1784252191.706228",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-17T09:36:31.706236"
+    },
+    {
+      "id": "1784192930.048058",
+      "user_id": "1",
+      "username": "admin",
+      "action": "批准",
+      "target": "智能客服系统技术白皮书.pdf",
+      "target_type": "document",
+      "detail": "批准文档: 智能客服系统技术白皮书.pdf",
+      "timestamp": "2026-07-16T17:08:50.048066"
+    },
+    {
+      "id": "1784190074.985576",
+      "user_id": "1",
+      "username": "admin",
+      "action": "驳回",
+      "target": "智能客服系统技术白皮书.pdf",
+      "target_type": "document",
+      "detail": "驳回文档: 智能客服系统技术白皮书.pdf",
+      "timestamp": "2026-07-16T16:21:14.985590"
+    },
+    {
+      "id": "1784190065.980446",
+      "user_id": "1",
+      "username": "admin",
+      "action": "批准",
+      "target": "2026年Q2季度财务报告.pdf",
+      "target_type": "document",
+      "detail": "批准文档: 2026年Q2季度财务报告.pdf",
+      "timestamp": "2026-07-16T16:21:05.980454"
+    },
+    {
+      "id": "1784187970.762331",
+      "user_id": "1",
+      "username": "admin",
+      "action": "编辑角色",
+      "target": "知识库管理员",
+      "target_type": "role",
+      "detail": "编辑角色: 知识库管理员",
+      "timestamp": "2026-07-16T15:46:10.762340"
+    },
+    {
+      "id": "1784186700.600665",
+      "user_id": "1",
+      "username": "admin",
+      "action": "启用角色",
+      "target": "知识库管理员",
+      "target_type": "role",
+      "detail": "启用角色: 知识库管理员",
+      "timestamp": "2026-07-16T15:25:00.600672"
+    },
+    {
+      "id": "1784186698.705324",
+      "user_id": "1",
+      "username": "admin",
+      "action": "禁用角色",
+      "target": "知识库管理员",
+      "target_type": "role",
+      "detail": "禁用角色: 知识库管理员",
+      "timestamp": "2026-07-16T15:24:58.705331"
+    },
+    {
+      "id": "1784184282.675166",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T14:44:42.675191"
+    },
+    {
+      "id": "1784184209.544918",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T14:43:29.544925"
+    },
+    {
+      "id": "1784183967.470275",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T14:39:27.470283"
+    },
+    {
+      "id": "1784183891.525078",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T14:38:11.525087"
+    },
+    {
+      "id": "1784183313.780311",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T14:28:33.780319"
+    },
+    {
+      "id": "1784183196.033373",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T14:26:36.033380"
+    },
+    {
+      "id": "1784183060.567374",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T14:24:20.567382"
+    },
+    {
+      "id": "1784182873.224226",
+      "user_id": "2",
+      "username": "前端张阳",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T14:21:13.224234"
+    },
+    {
+      "id": "1784181707.017641",
+      "user_id": "2",
+      "username": "前端张阳",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T14:01:47.017648"
+    },
+    {
+      "id": "1784181471.564854",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T13:57:51.564862"
+    },
+    {
+      "id": "1784181132.801648",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T13:52:12.801655"
+    },
+    {
+      "id": "1784181080.198513",
+      "user_id": "2",
+      "username": "前端张阳",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T13:51:20.198521"
+    },
+    {
+      "id": "1784179878.609001",
+      "user_id": "1",
+      "username": "admin",
+      "action": "批准",
+      "target": "测试文档2.pdf",
+      "target_type": "document",
+      "detail": "批准文档: 测试文档2.pdf，意见: 内容完整",
+      "timestamp": "2026-07-16T13:31:18.609007"
+    },
+    {
+      "id": "1784179878.607482",
+      "user_id": "1",
+      "username": "admin",
+      "action": "删除",
+      "target": "测试文档.pdf",
+      "target_type": "document",
+      "detail": "删除文档: 测试文档.pdf",
+      "timestamp": "2026-07-16T13:31:18.607534"
+    },
+    {
+      "id": "1784179149.501267",
+      "user_id": "1",
+      "username": "admin",
+      "action": "上传",
+      "target": "智能客服系统技术白皮书.pdf",
+      "target_type": "document",
+      "detail": "上传文档，共 6 个片段",
+      "timestamp": "2026-07-16T13:19:09.501274"
+    },
+    {
+      "id": "1784178675.360813",
+      "user_id": "1",
+      "username": "admin",
+      "action": "上传",
+      "target": "智能客服系统技术白皮书.pdf",
+      "target_type": "document",
+      "detail": "上传文档，共 6 个片段",
+      "timestamp": "2026-07-16T13:11:15.360820"
+    },
+    {
+      "id": "1784173122.042259",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T11:38:42.042265"
+    },
+    {
+      "id": "1784173086.546293",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T11:38:06.546300"
+    },
+    {
+      "id": "1784171506.194478",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "你好",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 2.07s",
+      "timestamp": "2026-07-16T11:11:46.194484"
+    },
+    {
+      "id": "1784171057.525777",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T11:04:17.525785"
+    },
+    {
+      "id": "1784170596.818759",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T10:56:36.818767"
+    },
+    {
+      "id": "1784169651.450287",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T10:40:51.450294"
+    },
+    {
+      "id": "1784169512.545096",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T10:38:32.545103"
+    },
+    {
+      "id": "1784169490.756773",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-07-16T10:38:10.756780"
+    }
+  ]
+}
