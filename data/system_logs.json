@@ -1,6 +1,26 @@
 {
   "logs": [
     {
+      "id": "1785837602.449198",
+      "user_id": "1",
+      "username": "admin",
+      "action": "查询",
+      "target": "绩效考核的评分标准是什么？",
+      "target_type": "query",
+      "detail": "AI对话查询，响应时间 4.18s",
+      "timestamp": "2026-08-04T18:00:02.449204"
+    },
+    {
+      "id": "1785837593.52534",
+      "user_id": "1",
+      "username": "admin",
+      "action": "登录",
+      "target": "系统",
+      "target_type": "system",
+      "detail": "用户登录系统",
+      "timestamp": "2026-08-04T17:59:53.525347"
+    },
+    {
       "id": "1785749094.032689",
       "user_id": "1",
       "username": "admin",

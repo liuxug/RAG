@@ -5,7 +5,7 @@
     "email": "admin@example.com",
     "hashed_password": "$pbkdf2-sha256$29000$JARg7F1L6R3D2HtPqZWSkg$F7zR9bSQ3E7PQ0I4qnICNtykay.vTY5L6dnPAKjDhlA",
     "created_at": "2026-07-13T14:06:06.374768",
-    "last_login": "2026-08-03T17:24:54.018608",
+    "last_login": "2026-08-04T17:59:53.505155",
     "is_active": true,
     "role": "超级管理员",
     "department": "技术部"
