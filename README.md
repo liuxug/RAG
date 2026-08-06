@@ -8,9 +8,7 @@
 ![Chroma](https://img.shields.io/badge/ChromaDB-0.5+-2E4057)
 ![LangChain](https://img.shields.io/badge/LangChain-0.3+-1C1C1C?logo=langchain)
 
-![image-20260804180025461](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20260804180025461.png)
 
-![image-20260804180055206](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20260804180055206.png)
 
 > 智识 RAG 文档问答中台是一套基于检索增强生成（Retrieval-Augmented Generation, RAG）技术构建的企业级智能文档问答系统。系统支持多种格式文档的上传与自动向量化索引，结合语义检索与大模型生成能力，为用户提供**准确、可溯源、可扩展**的智能问答服务。
 
