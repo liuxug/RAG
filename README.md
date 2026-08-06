@@ -8,10 +8,11 @@
 ![Chroma](https://img.shields.io/badge/ChromaDB-0.5+-2E4057)
 ![LangChain](https://img.shields.io/badge/LangChain-0.3+-1C1C1C?logo=langchain)
 
-
-
 > 智识 RAG 文档问答中台是一套基于检索增强生成（Retrieval-Augmented Generation, RAG）技术构建的企业级智能文档问答系统。系统支持多种格式文档的上传与自动向量化索引，结合语义检索与大模型生成能力，为用户提供**准确、可溯源、可扩展**的智能问答服务。
 
+<img width="1920" height="991" alt="image" src="https://github.com/user-attachments/assets/7d09ea30-2328-462e-91ec-092902a8d7c6" />
+<img width="1920" height="991" alt="image" src="https://github.com/user-attachments/assets/adc22587-93bc-4462-af39-6313fc9c4441" />
+<img width="1920" height="991" alt="image" src="https://github.com/user-attachments/assets/6687fd49-837e-4c26-9ba1-3a59068757b2" />
 ---
 
 ## ✨ 项目亮点
